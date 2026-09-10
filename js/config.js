@@ -128,9 +128,9 @@ window.WEDDING = {
       'và chọn đi chung một quãng đường thật dài.',
     ]},
     { type: 'text', lines: [
-      'Tên bạn chỉ vỏn vẹn vài chữ,',
+      'Tên em chỉ vỏn vẹn vài chữ,',
       'chưa đủ thành một câu trọn vẹn,',
-      'vậy mà đã đầy kín lòng tôi.',
+      'vậy mà đã đầy kín lòng anh.',
     ]},
     { type: 'photo', src: 'assets/photos/s1.jpg', ratio: '4/3' },
     { type: 'en',
@@ -177,28 +177,30 @@ window.WEDDING = {
 
   /* ══════════ CHƯƠNG 2 — sau album, trước lịch ══════════ */
   chapter2: [
-    { type: 'text', lines: [
-      'Những năm bạn đến muộn,',
-      'có lúc tôi đã tưởng cưới xin chỉ là chuyện thủ tục.',
-      'Rồi bạn xuất hiện,',
-      'và tôi thấy quãng chờ dài ấy hoá ra đều đáng.',
-    ]},
     { type: 'quote', lines: [
-      'Từ ngày gặp bạn,',
-      'giấc mơ nào của tôi cũng có bạn trong đó.',
+      'Những năm em đến muộn,',
+      'có lúc anh đã tưởng cưới xin chỉ là chuyện thủ tục.',
+      'Rồi em xuất hiện,',
+      'và anh thấy quãng chờ dài ấy hoá ra đều đáng.',
+    ]},
+    { type: 'text', lines: [
+      'Từ ngày gặp em,',
+      'giấc mơ nào của anh cũng có em trong đó.',
     ]},
     { type: 'photo', src: 'assets/photos/s2.jpg', ratio: '3/4' },
-    { type: 'text', lines: [
-      'Bạn không phải là đích đến của tình yêu,',
-      'bạn là lý do khiến tôi bắt đầu —',
-      'vì bạn mà tôi thương luôn cả thế giới này.',
+    { type: 'quote', lines: [
+      'Em không phải là đích đến của tình yêu,',
+      'em là lý do khiến anh bắt đầu —',
+      'vì em mà anh thương luôn cả thế giới này.',
     ]},
-    { type: 'text', lines: [
-      'Chúng mình cùng hai bên gia đình',
-      'trân trọng mời bạn đến chung vui,',
-      'lấy một ngày thật rực rỡ',
-      'để mở đầu cho những năm tháng dài lâu.',
-    ]},
+  ],
+
+  /* ══════════ LỜI MỜI TRƯỚC LỊCH ══════════ */
+  calendarIntro: [
+    'Chúng mình cùng hai bên gia đình',
+    'trân trọng mời bạn đến chung vui,',
+    'lấy một ngày thật rực rỡ',
+    'để mở đầu cho những năm tháng dài lâu.',
   ],
 
   /* ══════════ DẶN DÒ KHÁCH ══════════ */

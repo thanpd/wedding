@@ -143,6 +143,7 @@
   fillLines('#letterBody',  C.letter.lines);
   fillLines('#closingBody', C.closing.lines);
   fillLines('#quoteBody',   C.quote);
+  fillLines('#calendarIntro', C.calendarIntro || []);
 
   /* ----------------------------------------------------------
      Màn hình chờ
