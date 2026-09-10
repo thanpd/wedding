@@ -15,12 +15,16 @@ Trang thiệp cưới một trang, chạy tĩnh — không cần backend, không
    | `cover.jpg` | Đĩa than trang bìa + ảnh nhạc | **1:1** (vuông) |
    | `groom.jpg` | Chân dung chú rể | 3:4 (dọc) |
    | `bride.jpg` | Chân dung cô dâu | 3:4 (dọc) |
-   | `g1.jpg` | Album — ảnh ngang lớn | 4:3 (ngang) |
-   | `g2.jpg` | Album — ảnh dọc trái | 3:4 (dọc) |
-   | `g3.jpg` | Album — ảnh dọc phải | 3:4 (dọc) |
+   | `gal/01.jpg`… | Album — dải ảnh chạy ngang, khai trong `gallery.groups` | tuỳ ô: 3:4, 3:2 hoặc 1:1 |
    | `s1.jpg` | Ảnh xen trong `chapter1` | 4:3 (ngang) |
    | `s2.jpg` | Ảnh xen trong `chapter2` | 3:4 (dọc) |
    | `c1.jpg` | Khối ảnh tròn trong `chapter1` | **1:1** (vuông) |
+
+   Album là một dải chạy ngang từ phải sang trái, ghép từ nhiều cụm bố cục
+   khác nhau (`tall` một ảnh dọc, `wide` một ảnh ngang, `stack` hai ảnh vuông
+   xếp dọc, `mix` một ảnh dọc + hai ảnh vuông nhỏ). Muốn thêm ảnh thì bỏ file
+   vào `assets/photos/gal/` rồi khai thêm một cụm trong `gallery.groups`;
+   `gallery.speed` đổi tốc độ chạy (px mỗi giây).
 
    Thiếu ảnh nào thì chỗ đó hiện ô xám ghi tên slot — trang vẫn chạy bình thường.
    Nên nén ảnh xuống dưới ~300KB mỗi tấm để khách mở nhanh trên 4G.

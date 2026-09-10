@@ -112,10 +112,9 @@
 
   <!-- ══════════ 8. ALBUM ẢNH ══════════ -->
   <section class="sec sec-gallery">
-    <div class="g-wide reveal"><img data-slot="Ảnh ngang" alt=""></div>
-    <div class="g-row">
-      <div class="g-tall reveal"><img data-slot="Ảnh dọc 1" alt=""></div>
-      <div class="g-tall g-tall-down reveal" data-delay="140"><img data-slot="Ảnh dọc 2" alt=""></div>
+    <!-- Dải ảnh chạy ngang, dựng từ config.gallery.groups -->
+    <div class="gal-marquee reveal" id="galMarquee">
+      <div class="gal-track" id="galTrack"></div>
     </div>
     <div class="g-caption reveal">
       <div id="galNames"></div>

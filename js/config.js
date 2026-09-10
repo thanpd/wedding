@@ -143,11 +143,34 @@ window.WEDDING = {
     'vì ngày nào cũng vậy cả.',
   ],
 
-  /* ══════════ ALBUM ẢNH ══════════ */
+  /* ══════════ ALBUM ẢNH ══════════
+     Dải ảnh chạy ngang từ phải sang trái, lặp vòng không dứt. Kéo/quét
+     ngang để tự xem, trỏ chuột vào (hoặc đang kéo) thì dải dừng lại.
+     Mỗi cụm là một bố cục khác nhau — thêm / bớt / đổi thứ tự thoải mái:
+       'tall'  một ảnh dọc lớn                      → 1 ảnh, khung 3/4
+       'wide'  một ảnh ngang lớn                    → 1 ảnh, khung 3/2
+       'stack' hai ảnh vuông xếp dọc                → 2 ảnh, khung 1/1
+       'mix'   một ảnh dọc + hai ảnh vuông nhỏ      → 3 ảnh
+     photos điền theo đúng thứ tự ô của bố cục. Thiếu ảnh nào thì ô đó
+     hiện placeholder, dải vẫn chạy. */
   gallery: {
-    wide: 'assets/photos/g1.jpg',
-    tallLeft: 'assets/photos/g2.jpg',
-    tallRight: 'assets/photos/g3.jpg',
+    speed: 34,          // px mỗi giây; số nhỏ hơn thì chạy chậm hơn
+    groups: [
+      { layout: 'tall',  photos: ['assets/photos/gal/01.jpg'] },
+      { layout: 'stack', photos: ['assets/photos/gal/02.jpg',
+                                  'assets/photos/gal/03.jpg'] },
+      { layout: 'wide',  photos: ['assets/photos/gal/04.jpg'] },
+      { layout: 'mix',   photos: ['assets/photos/gal/05.jpg',
+                                  'assets/photos/gal/06.jpg',
+                                  'assets/photos/gal/07.jpg'] },
+      { layout: 'tall',  photos: ['assets/photos/gal/08.jpg'] },
+      { layout: 'stack', photos: ['assets/photos/gal/09.jpg',
+                                  'assets/photos/gal/10.jpg'] },
+      { layout: 'wide',  photos: ['assets/photos/gal/11.jpg'] },
+      { layout: 'mix',   photos: ['assets/photos/gal/12.jpg',
+                                  'assets/photos/gal/13.jpg',
+                                  'assets/photos/gal/14.jpg'] },
+    ],
   },
 
   /* ══════════ CHƯƠNG 2 — sau album, trước lịch ══════════ */

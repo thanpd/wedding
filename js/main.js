@@ -80,9 +80,7 @@
   setImg(imgs[1], C.music.cover,          'Ảnh nhạc');
   setImg(imgs[2], C.groom.photo,          'Chú rể');
   setImg(imgs[3], C.bride.photo,          'Cô dâu');
-  setImg(imgs[4], C.gallery.wide,         'Ảnh cưới');
-  setImg(imgs[5], C.gallery.tallLeft,     'Ảnh cưới');
-  setImg(imgs[6], C.gallery.tallRight,    'Ảnh cưới');
+  /* Album ảnh dựng động ở buildGallery() bên dưới */
 
   /* ----------------------------------------------------------
      Đổ nội dung chữ
@@ -292,6 +290,117 @@
   }
   wireCall('#callGroom', C.groom.phone, 'Gọi chú rể');
   wireCall('#callBride', C.bride.phone, 'Gọi cô dâu');
+
+  /* ----------------------------------------------------------
+     Album ảnh — dải chạy ngang từ phải sang trái
+     Dựng các cụm theo config.gallery.groups rồi nhân đôi dải, nhờ vậy
+     lúc trôi hết một dải thì cộng lại đúng bề rộng dải gốc, mắt không
+     thấy điểm nối. Chạy bằng requestAnimationFrame thay vì animation CSS
+     vì còn phải cho kéo tay và dừng giữa vòng.
+     ---------------------------------------------------------- */
+  (function buildGallery() {
+    var box   = $('#galMarquee');
+    var track = $('#galTrack');
+    if (!box || !track) return;
+
+    var G      = C.gallery || {};
+    var groups = G.groups || [];
+    var SLOTS  = { tall: 1, wide: 1, stack: 2, mix: 3 };   // số ô ảnh mỗi bố cục
+
+    if (!groups.length) { box.hidden = true; return; }
+
+    function photo(src) {
+      var img = document.createElement('img');
+      img.decoding = 'async';
+      setImg(img, src, 'Ảnh cưới');
+      return img;
+    }
+
+    function makeGroup(g) {
+      var layout = SLOTS[g.layout] ? g.layout : 'tall';
+      var srcs = g.photos || [];
+      var el = document.createElement('div');
+      el.className = 'gal-group gal-' + layout;
+
+      if (layout === 'mix') {
+        /* ảnh dọc lớn + cột hai ảnh vuông nhỏ */
+        el.appendChild(photo(srcs[0]));
+        var col = document.createElement('div');
+        col.className = 'gal-col';
+        col.appendChild(photo(srcs[1]));
+        col.appendChild(photo(srcs[2]));
+        el.appendChild(col);
+      } else {
+        for (var i = 0; i < SLOTS[layout]; i++) el.appendChild(photo(srcs[i]));
+      }
+      return el;
+    }
+
+    function fill() { groups.forEach(function (g) { track.appendChild(makeGroup(g)); }); }
+    fill();
+
+    /* Khách xin bớt hiệu ứng thì thôi tự chạy, để họ cuộn ngang bằng tay */
+    var still = window.matchMedia &&
+                window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (still) { box.classList.add('gal-static'); return; }
+
+    fill();                       /* bản sao thứ hai để chạy vòng */
+
+    var baseW = 0;                /* bề rộng một dải, tính cả khe sau cụm cuối */
+    function measure() {
+      var gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+      baseW = (track.scrollWidth + gap) / 2;
+    }
+
+    var speed  = typeof G.speed === 'number' ? G.speed : 34;   // px mỗi giây
+    var offset = 0, prev = 0;
+    var hover = false, drag = null, seen = true;
+
+    function now() {
+      return window.performance && performance.now ? performance.now() : Date.now();
+    }
+
+    function frame() {
+      /* chặn dt để lúc quay lại tab dải không nhảy một đoạn dài */
+      var t = now();
+      var dt = prev ? Math.min((t - prev) / 1000, 0.05) : 0;
+      prev = t;
+      if (!baseW) measure();
+      if (seen && !hover && !drag) offset -= speed * dt;
+      if (baseW) {
+        while (offset <= -baseW) offset += baseW;
+        while (offset > 0) offset -= baseW;
+      }
+      track.style.transform = 'translate3d(' + offset.toFixed(2) + 'px,0,0)';
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+    window.addEventListener('resize', measure);
+
+    /* Trỏ chuột vào thì dừng để xem cho kỹ */
+    box.addEventListener('pointerenter', function () { hover = true; });
+    box.addEventListener('pointerleave', function () { hover = false; });
+
+    /* Kéo / quét ngang để tự xem */
+    box.addEventListener('pointerdown', function (e) {
+      drag = { x: e.clientX, from: offset };
+      box.classList.add('dragging');
+      if (box.setPointerCapture) box.setPointerCapture(e.pointerId);
+    });
+    box.addEventListener('pointermove', function (e) {
+      if (drag) offset = drag.from + (e.clientX - drag.x);
+    });
+    function endDrag() { drag = null; box.classList.remove('dragging'); }
+    box.addEventListener('pointerup', endDrag);
+    box.addEventListener('pointercancel', endDrag);
+
+    /* Cuộn qua khỏi album thì thôi chạy cho nhẹ máy */
+    if (window.IntersectionObserver) {
+      new IntersectionObserver(function (es) {
+        es.forEach(function (e) { seen = e.isIntersecting; });
+      }, { root: $('#pageWrap') }).observe(box);
+    }
+  })();
 
   /* Album: tên latin + ngày, giống caption bản gốc */
   $('#galNames').textContent = C.bride.nameEn + '\n' + C.groom.nameEn;
