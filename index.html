@@ -141,13 +141,17 @@
     </div>
   </section>
 
-  <!-- ══════════ 10. BẢN ĐỒ + CHI TIẾT ══════════ -->
+  <!-- ══════════ 10. QR CHỈ ĐƯỜNG + CHI TIẾT ══════════ -->
   <section class="sec sec-map">
     <div class="map-box reveal">
-      <iframe id="mapFrame" title="Bản đồ địa điểm" loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"></iframe>
-      <a class="map-go" id="mapGo" target="_blank" rel="noopener" aria-label="Chỉ đường">
-        <svg viewBox="0 0 24 24"><path d="M3 11l18-8-8 18-2-7-8-3z"/></svg>
+      <a class="qr-link" id="mapLink" target="_blank" rel="noopener"
+         aria-label="Mở chỉ đường trên Google Maps">
+        <span class="qr-frame">
+          <img class="qr-code" src="assets/map-qr.png"
+               alt="Mã QR chỉ đường đến địa điểm tổ chức">
+        </span>
+        <span class="qr-caption">Quét mã QR để xem đường đi</span>
+        <span class="qr-hint">Chạm vào mã để mở Google Maps</span>
       </a>
     </div>
     <div class="detail reveal">

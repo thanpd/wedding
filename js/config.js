@@ -51,6 +51,8 @@ window.WEDDING = {
        nên tốt nhất là dán toạ độ, dạng '15.9012,108.2345'.
        Cách lấy: mở Google Maps, giữ lâu vào đúng vị trí nhà, copy cặp số hiện ra. */
     mapQuery: 'Thanh Quýt 6, An Thắng, Đà Nẵng',
+    /* Liên kết được mở khi chạm vào mã QR. */
+    mapUrl: 'https://www.google.com/maps/dir//15.9308142,108.223361/@15.9307674,108.2231506,19.5z/data=!4m2!4m1!3e0?entry=ttu&g_ep=EgoyMDI2MDkwOC4wIKXMDSoASAFQAw%3D%3D',
   },
 
   /* ══════════ NHẠC NỀN ══════════ */

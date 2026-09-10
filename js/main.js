@@ -419,11 +419,10 @@
   setOrHide('#dAddr',  C.venue.address);
 
   /* ----------------------------------------------------------
-     Bản đồ (Google Maps embed — không cần API key)
+     Mã QR chỉ đường
      ---------------------------------------------------------- */
   var q = encodeURIComponent(C.venue.mapQuery || C.venue.address);
-  $('#mapFrame').src = 'https://maps.google.com/maps?q=' + q + '&z=16&output=embed';
-  $('#mapGo').href   = 'https://www.google.com/maps/search/?api=1&query=' + q;
+  $('#mapLink').href = C.venue.mapUrl || 'https://www.google.com/maps/search/?api=1&query=' + q;
 
   /* ----------------------------------------------------------
      Đồng hồ đếm ngược

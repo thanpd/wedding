@@ -195,8 +195,9 @@ các vòng sau. Không khai `tracks` thì trình phát dùng `music.title` như 
 Tên bài hiện tối đa 2 dòng và chiều cao thẻ được ghim cố định, nên thẻ không co giãn mỗi
 lần sang bài mới.
 
-**Bản đồ.** Dùng Google Maps embed nên không cần API key. Sửa `venue.mapQuery` trong config —
-có thể là địa chỉ chữ hoặc toạ độ dạng `'10.7295,106.7215'` (chính xác hơn).
+**QR chỉ đường.** Ảnh `assets/map-qr.png` chứa liên kết Google Maps; `venue.mapUrl`
+trong config là liên kết được mở khi khách chạm vào mã. `venue.mapQuery` được
+dùng làm liên kết tìm kiếm dự phòng nếu không khai báo `mapUrl`.
 
 **Ngày âm lịch** tự tính từ `datetime`, không cần điền. Đổi ngày cưới thì ngày âm đổi
 theo. Muốn tự viết câu khác thì điền chuỗi vào `lunarText`, khi đó phần tự tính bị bỏ qua;
