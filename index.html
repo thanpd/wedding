@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>Thiệp cưới</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="format-detection" content="telephone=no,email=no">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="theme-color" content="#fdfbf8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Dancing+Script:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ══════════ MÀN HÌNH CHỜ ══════════ -->
+<div class="splash" id="splash">
+  <p class="splash-kicker" id="splashKicker"></p>
+  <p class="splash-note"   id="splashNote"></p>
+  <h1 class="splash-names" id="splashNames"></h1>
+  <p class="splash-date"   id="splashDate"></p>
+  <p class="splash-lunar"  id="splashLunar"></p>
+  <div class="splash-msg">
+    <p id="splashHello"></p>
+    <p id="splashLine"></p>
+  </div>
+  <button class="splash-go" id="splashGo">Mở thiệp</button>
+</div>
+
+<!-- Vùng cuộn chính: bản gốc dùng 1 container cuộn thay vì cuộn body -->
+<div class="page-wrap" id="pageWrap">
+
+  <!-- ══════════ 1. TRANG BÌA — đĩa than xoay ══════════ -->
+  <section class="sec sec-cover">
+    <!-- Đĩa than và chữ viết tay nằm chung một khối để chữ đè lên đĩa -->
+    <div class="cover-stage">
+      <div class="vinyl" id="vinyl">
+        <div class="vinyl-disc">
+          <img class="vinyl-photo" data-slot="Ảnh bìa" alt="">
+        </div>
+      </div>
+      <h1 class="cover-script" id="coverScript"></h1>
+    </div>
+    <p class="cover-sub" id="coverSub"></p>
+
+    <!-- ══════════ 2. TRÌNH PHÁT NHẠC ══════════
+         Nằm ngay trong trang bìa để hiện cùng đĩa than ở màn hình đầu -->
+    <div class="player">
+      <div class="player-info">
+        <div class="player-title" id="songTitle"></div>
+        <div class="player-bar"><i id="songProgress"></i></div>
+        <div class="player-state" id="songState">Đang phát nhạc . . .</div>
+      </div>
+      <div class="player-side">
+        <img class="player-cover" data-slot="Ảnh nhạc" alt="">
+        <div class="eq" id="eq"><i></i><i></i><i></i><i></i><i></i></div>
+      </div>
+    </div>
+
+    <div class="scroll-hint" aria-hidden="true"><span></span></div>
+  </section>
+
+  <!-- ══════════ 3. TIÊU ĐỀ ══════════ -->
+  <section class="sec sec-title">
+    <div class="divider reveal"></div>
+    <p class="kicker reveal">WEDDING INVITATION</p>
+    <p class="couple-line reveal" id="coupleLine"></p>
+  </section>
+
+  <!-- ══════════ 4. CHÂN DUNG CÔ DÂU / CHÚ RỂ ══════════ -->
+  <section class="sec sec-portraits">
+    <div class="portraits">
+      <figure class="portrait reveal">
+        <img data-slot="Ảnh chú rể" alt="">
+        <figcaption>Chú rể: <b id="groomName"></b></figcaption>
+      </figure>
+      <figure class="portrait reveal" data-delay="120">
+        <img data-slot="Ảnh cô dâu" alt="">
+        <figcaption>Cô dâu: <b id="brideName"></b></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ══════════ 5. THƯ NGỎ ══════════ -->
+  <section class="sec sec-letter">
+    <h2 class="letter-hi reveal" id="letterHi"></h2>
+    <div class="letter-body" id="letterBody"></div>
+    <p class="letter-sign reveal" id="letterSign"></p>
+  </section>
+
+  <!-- ══════════ 5b. CHƯƠNG 1 (dựng từ config.chapter1) ══════════ -->
+  <div id="chapter1"></div>
+
+  <!-- ══════════ 6. ĐẾM NGƯỢC ══════════ -->
+  <section class="sec sec-countdown">
+    <div class="divider reveal"></div>
+    <div class="countdown reveal" id="countdown">
+      <div class="cd-cell"><b id="cdDay">--</b><span>NGÀY</span></div>
+      <div class="cd-cell"><b id="cdHour">--</b><span>GIỜ</span></div>
+      <div class="cd-cell"><b id="cdMin">--</b><span>PHÚT</span></div>
+      <div class="cd-cell"><b id="cdSec">--</b><span>GIÂY</span></div>
+    </div>
+    <p class="cd-done" id="cdDone" hidden>Chúng mình đã về chung một nhà ♥</p>
+  </section>
+
+  <!-- ══════════ 7. CÂU TRÍCH ══════════ -->
+  <section class="sec sec-quote">
+    <div class="quote-mark reveal">/</div>
+    <div class="quote-body" id="quoteBody"></div>
+  </section>
+
+  <!-- ══════════ 8. ALBUM ẢNH ══════════ -->
+  <section class="sec sec-gallery">
+    <div class="g-wide reveal"><img data-slot="Ảnh ngang" alt=""></div>
+    <div class="g-row">
+      <div class="g-tall reveal"><img data-slot="Ảnh dọc 1" alt=""></div>
+      <div class="g-tall g-tall-down reveal" data-delay="140"><img data-slot="Ảnh dọc 2" alt=""></div>
+    </div>
+    <div class="g-caption reveal">
+      <div id="galNames"></div>
+      <div class="g-date" id="galDate"></div>
+    </div>
+  </section>
+
+  <!-- ══════════ 8b. CHƯƠNG 2 (dựng từ config.chapter2) ══════════ -->
+  <div id="chapter2"></div>
+
+  <!-- ══════════ 9. LỊCH ══════════ -->
+  <section class="sec sec-calendar">
+    <div class="divider reveal"></div>
+    <div class="cal-head reveal">
+      <span class="cal-mm" id="calMonth">--</span>
+      <span class="cal-dd" id="calDay">/ --</span>
+      <span class="cal-yy" id="calYear">----</span>
+    </div>
+    <div class="cal reveal">
+      <div class="cal-week">
+        <b>T2</b><b>T3</b><b>T4</b><b>T5</b><b>T6</b><b>T7</b><b>CN</b>
+      </div>
+      <div class="cal-grid" id="calGrid"></div>
+    </div>
+  </section>
+
+  <!-- ══════════ 10. BẢN ĐỒ + CHI TIẾT ══════════ -->
+  <section class="sec sec-map">
+    <div class="map-box reveal">
+      <iframe id="mapFrame" title="Bản đồ địa điểm" loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <a class="map-go" id="mapGo" target="_blank" rel="noopener" aria-label="Chỉ đường">
+        <svg viewBox="0 0 24 24"><path d="M3 11l18-8-8 18-2-7-8-3z"/></svg>
+      </a>
+    </div>
+    <div class="detail reveal">
+      <p id="dDate"></p>
+      <p id="dTime"></p>
+      <p id="dLunar" class="dim"></p>
+      <p id="dVenue" class="strong"></p>
+      <p id="dAddr" class="dim"></p>
+    </div>
+  </section>
+
+  <!-- ══════════ 11. DẶN DÒ KHÁCH ══════════ -->
+  <section class="sec sec-notes">
+    <div class="divider reveal"></div>
+    <h2 class="notes-title reveal" id="notesTitle"></h2>
+    <ol class="notes-list" id="notesList"></ol>
+  </section>
+
+  <!-- ══════════ 12. LIÊN HỆ ══════════ -->
+  <section class="sec sec-contact">
+    <div class="contact-row reveal">
+      <a class="contact-btn" id="callGroom">
+        <svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 013 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1l-2.3 2.2z"/></svg>
+        <span>Gọi chú rể</span>
+      </a>
+      <a class="contact-btn" id="callBride">
+        <svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 013 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1l-2.3 2.2z"/></svg>
+        <span>Gọi cô dâu</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ══════════ 13. XÁC NHẬN THAM DỰ ══════════ -->
+  <section class="sec sec-rsvp" id="rsvpSec">
+    <h2 class="rsvp-title reveal" id="rsvpTitle"></h2>
+    <p class="rsvp-hint reveal" id="rsvpHint"></p>
+    <form class="rsvp-form reveal" id="rsvpForm" novalidate>
+      <label>Tên của bạn <i>*</i>
+        <input type="text" id="rsName" maxlength="40" required autocomplete="name">
+      </label>
+      <label>Số điện thoại
+        <input type="tel" id="rsPhone" maxlength="20" autocomplete="tel">
+      </label>
+      <fieldset class="rsvp-choice">
+        <legend>Bạn có tới được không? <i>*</i></legend>
+        <label class="rc"><input type="radio" name="attend" value="Có, chắc chắn tới" checked><span>Có, chắc chắn tới</span></label>
+        <label class="rc"><input type="radio" name="attend" value="Chưa chắc"><span>Chưa chắc</span></label>
+        <label class="rc"><input type="radio" name="attend" value="Rất tiếc, không tới được"><span>Rất tiếc, không tới được</span></label>
+      </fieldset>
+      <label>Đi mấy người?
+        <input type="number" id="rsCount" min="1" max="20" value="1" inputmode="numeric">
+      </label>
+      <button type="submit" class="btn-solid rsvp-submit">Gửi xác nhận</button>
+      <p class="rsvp-ok" id="rsvpOk" hidden>Đã nhận rồi, cảm ơn bạn nhiều ❤</p>
+    </form>
+  </section>
+
+  <!-- ══════════ 14. SỔ LƯU BÚT ══════════ -->
+  <section class="sec sec-guestbook" id="guestbookSec">
+    <h2 class="gb-title reveal">Sổ lưu bút</h2>
+    <ul class="gb-list" id="gbList"></ul>
+    <p class="gb-empty" id="gbEmpty">Chưa có lời chúc nào — bạn viết dòng đầu tiên nhé.</p>
+    <button class="gb-open reveal" id="gbOpen">
+      <svg viewBox="0 0 24 24"><path d="M3 5h18v12H8l-5 4V5z"/></svg>
+      <span>Gửi lời chúc</span>
+    </button>
+  </section>
+
+  <!-- ══════════ 15. LỜI CẢM ƠN + KẾT ══════════ -->
+  <section class="sec sec-end">
+    <div class="divider reveal"></div>
+    <div class="letter-body center" id="closingBody"></div>
+    <p class="end-thanks reveal" id="endInvite"></p>
+    <p class="end-names reveal" id="endNames"></p>
+  </section>
+
+</div><!-- /.page-wrap -->
+
+<!-- Nút bật/tắt nhạc (đĩa xoay góc trên phải) -->
+<button class="music-btn" id="musicBtn" aria-label="Bật / tắt nhạc">
+  <svg viewBox="0 0 24 24"><path d="M12 3v10.6A4 4 0 1014 17V7h4V3h-6z"/></svg>
+</button>
+
+<!-- Hộp thoại viết lời chúc -->
+<div class="modal" id="modal" hidden>
+  <div class="modal-card">
+    <h3>Gửi lời chúc</h3>
+    <input id="gbName" type="text" maxlength="24" placeholder="Tên của bạn">
+    <textarea id="gbMsg" rows="4" maxlength="300"></textarea>
+    <div class="modal-actions">
+      <button class="btn-ghost" id="gbCancel">Huỷ</button>
+      <button class="btn-solid" id="gbSend">Gửi</button>
+    </div>
+  </div>
+</div>
+
+<canvas id="fx"></canvas>
+<!-- preload="metadata": chỉ tải phần đầu để biết thời lượng, không nạp sẵn
+     cả file. Quan trọng với khách dùng 4G, nhất là khi file nhạc lớn. -->
+<audio id="audio" loop preload="metadata"></audio>
+
+<script src="js/config.js"></script>
+<script src="js/lunar.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

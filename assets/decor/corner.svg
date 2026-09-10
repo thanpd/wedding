@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120" role="img" aria-label="Hoạ tiết góc">
+  <g fill="none" stroke="#c9a3ab" stroke-width="1" stroke-linecap="round">
+    <!-- cung cong chính -->
+    <path d="M6 114C6 54 54 6 114 6" opacity=".7"/>
+    <path d="M14 114C14 60 60 14 114 14" opacity=".35"/>
+
+    <!-- nhánh lá bám theo cung -->
+    <path d="M22 92c-6-2-10-6-12-11M22 92c1-6 0-11-3-15"/>
+    <path d="M38 70c-6-1-11-4-14-9M38 70c0-6-2-11-5-14"/>
+    <path d="M60 50c-6 0-11-2-15-6M60 50c-1-6-3-10-7-13"/>
+    <path d="M85 34c-5 1-11 0-15-3M85 34c-2-5-5-9-9-11"/>
+  </g>
+
+  <!-- ba nụ hoa nhỏ -->
+  <g fill="#e88aa2" opacity=".75">
+    <circle cx="30" cy="82" r="2.4"/>
+    <circle cx="49" cy="59" r="2"/>
+    <circle cx="72" cy="41" r="1.7"/>
+  </g>
+</svg>
